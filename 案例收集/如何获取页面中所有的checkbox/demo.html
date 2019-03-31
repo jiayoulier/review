@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加油立儿--获取复选框</title>
+	<script>
+		window.onload = function () {
+
+			//1. 在jquery中获取复选框
+			//$('input:checkbox')
+
+			//2. 不用第三方插件
+
+			// 获取页面上所有的input
+			var inputs = document.querySelectorAll('input');
+			var len = inputs.length;
+			console.log(len)
+			// 声明一个空数组存放页面上的checkbox 
+			var checkboxs = [];
+			while (len--) {
+				var input = inputs[len];
+				if (input.type === 'checkbox') {
+					checkboxs.push(input);
+				}
+			}
+			console.dir(checkboxs)
+		}
+
+	</script>
+</head>
+<body>
+	<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" enctype="application/x-www-form-urlencoded">
+		用户名:<input type="text" name="userName"><br>
+		手机号: <input type="tel" name="userPhone" required pattern="^(\+86)?1\d{10}$"><br>
+		年 龄 : <input type="radio" name="sex" value="男" checked>男<input type="radio" name="sex" value="女"> 女<br>
+		爱好: <input type="checkbox" name="hobby[]" value="听歌">听歌 <input type="checkbox" name="hobby[]" value="睡觉">睡觉<br>
+		文件: <input type="file" name="photo" multipul><br>
+		邮箱: <input type="email" name="email" multipul><br>
+		<input type="submit">
+	</form>
+</body>
+</html>

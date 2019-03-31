@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="jquery-1.12.2.js"></script>
+	<script>
+		// 1. 创建数组的两种方式
+
+		// 字面量创建数组
+		var arr = [1, 2, 3];
+		console.log(arr.length); // 3
+
+		// new对象创建对象
+		var arr1 = new Array() // 创建一个空数组
+		console.log(arr1);
+
+		var arr2 = new Array(5); // 数组长度为5,但是内容为空
+		console.log(arr2);
+		console.log(arr2.length); // 5
+
+		var arr3 = new Array(1,2,3); // 创建一个[1,2,3]的数组
+		console.log(arr3); // [1,2,3]
+
+
+
+		//2.检测是否为数组  typeof 检测基本数据类型 instanceof 检测复杂数据类型   
+		// Array.isArray() HTML5中的新方法 有兼容性问题
+		// a instanceof b    b(b.prototype)是否在a(a.__proto__.__proto__......)的原型链上
+		var arr = [1,2];
+		var o = {};
+		console.log(typeof arr); // object
+		console.log(typeof o); // object
+		console.log(arr instanceof Array); // true
+		console.log(arr instanceof Object); // true
+		console.log(o instanceof Object); // true
+		console.log(Array.isArray(arr)); // true
+
+		// 3.数组转字符串
+		var arr2 = ['小馒头', '大肥羊'];
+		var str = arr2.toString();
+		console.log(str); // 小肥羊,大馒头
+		// join('分隔符')  用于吧数组中的所有元素转换成一个字符串   返回一个字符串
+		var str1 = arr2.join('');
+		console.log(str1) // 小馒头大肥羊
+		console.log(arr2.join()) // 小肥羊,大馒头
+		console.log(arr2.join(',')) // 小肥羊,大馒头
+		console.log(arr2.join('-')) // 小肥羊-大馒头
+
+
+		// 4.数组的添加和删除
+		// push()  向数组最后添加一个或多个元素,返回新长度
+		// pop()  删除数组最后一个元素,数组长度减一,返回删除的元素  不跟参数
+		//shift()  把数组中的第一个元素删除.数组长度减一,返回删除元素值  不跟参数
+		// unshift()  向数组的开头添加一个或多个元素,返回新的长度
+		var arr3 = ['pink', 'gray', 'purple', 'white'];
+		console.log(arr3.push('green')); // 5
+		console.log(arr3);
+		console.log(arr3.pop()); // green
+		console.log(arr3);
+		console.log(arr3.shift()) // pink
+		console.log(arr3.unshift('pink')); // 4
+		console.log(arr3);
+
+		// 5.数组排序方法
+		// reverse() 颠倒数组中的元素,无参数 会改变原来的数组
+		var arr4 = ['pink', 'gray', 'purple', 'white'];
+		console.log(arr4.reverse());
+		console.log(arr4);
+		// sort() 对数组的元素进行排序  也会改变原来的数组 如果调用该方法时没有使用参数，按照字符编码的顺序进行排序。
+		var arr5 = ['a', 'c', 'b'];
+		arr5.sort();
+		console.log(arr5); //  ['a', 'b', 'c'];
+
+		var arr6 = [1,23, 56,67,32];
+		arr6.sort(function(a, b) {
+			return b-a; // 从大到小排序
+			// return a- b 从小到大排序
+		})
+		console.log(arr6);
+
+		//6.数组的位置
+		// indexOf('查找的元素',什么位置开始查找) 数组中查找给定元素的第一个索引,找到返回索引号,找不到返回-1  
+		// lastIndexOf()  从有往左查找
+
+		var arr10 = ['pink', 'lili', 'xianxian', 'ermao', 'pink'];
+		console.log(arr10.indexOf('pink')) // 0
+		console.log(arr10.indexOf('pink', 1)) // 4
+		console.log(arr10.lastIndexOf('pink')) // 4
+		console.log(arr10.lastIndexOf('ermao',0)) // -1
+
+		//7.清空数组
+		// 1. arr = [];  2. arr.length = 0;   3. arr.splice(0, arr.length)
+
+
+		//8.数组位置操作方法
+		// concat() 连接两个或者多个数组,不影响原数组,返回一个新数组
+		//arr1.concat(arr2,arr3);
+		//slice(开始的索引, 结束的索引)  截取,返回被截取的新数组 包含开始的索引,不包含结束的索引
+		// arr.slice() 默认截取整个数组  arr.slice(0) 从0个截取到最后
+		//arr.slice(0,3) 从0个截取到第三个,包括索引为0 的,不包括索引为三的
+
+		// splice(第几个开始,要删除的个数, [插入元素])  返回被删除后的新数组 会影响原数组
+		var arr7 = [1,2];
+		var arr8 = [3,4];
+		console.log(arr7.concat(arr8)); // [1,2,3,4];
+		console.log(arr7.slice());  // [1,2]
+		console.log(arr7.slice(0)); //  [1,2]
+		var arr9 = [7,8,9];
+		console.log(arr9.splice(0,1)) // [7];
+		console.log(arr9); // [8,9]
+		console.log(arr9.splice(1,0,99)); // []
+		console.log(arr9); // [8,99,9]
+
+
+		// 原生js中遍历数组的方法(不能遍历伪数组.for可以)
+		var array = ['pink', 'red', 'green'];
+		array.forEach(function(value, index) {
+			console.log(value);
+			console.log(index);
+			console.log(this);  // window
+		})
+
+		// jquery中遍历数组的方法(可以遍历数组和伪数组)
+		var arra = ['gray', 'purple', 'yellow'];
+		$(arra).each(function(index, value) {
+			console.log(value);
+			console.log(index);
+			console.log(this);  //   数组中的每个元素
+			console.log($(this)); // 所有的jquery对象都是一个伪数组
+			console.log($(this)[0]); 
+		})
+
+
+		var c = [1,2,3];
+		var b = c;
+		c.pop();
+		console.log(b); // [1,2]
+
+		var g = 3;
+		var h = g;
+		g = 5;
+		console.log(h); // 3
+	</script>
+</body>
+</html>

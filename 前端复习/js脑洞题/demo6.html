@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加油立儿-6</title>
+</head>
+<body>
+	<script>
+		var a=4;
+		function b(x,y,a){
+			alert(a); // 3
+			arguments[2]=10;
+			alert(a); // 10
+		}
+		a = b(1,2,3); // 函数调用没有返回值
+		alert(a); //undefined
+	</script>
+</body>
+</html>

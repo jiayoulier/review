@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /* 单伪元素清除浮动 */
+        /* .clearfix:after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+        .clearfix {
+            /* ie6,7 专门清除浮动的样式 */
+            /* *zoom : 1; */
+        /* } */ 
+
+        /* 双伪元素清除浮动 */
+        .clearfix:before,
+        .clearfix:after {
+            content: '';
+            display: table;
+        }
+        .clearfix:after {
+            clear: both;
+        }
+        .clearfix {
+            *zoom: 1;
+        }
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+        .box {
+            width: 500px;
+            margin: 100px auto 0;
+            border: 1px solid red;
+            /* 给父盒子添加 overflow:hidden; */
+            /* overflow: hidden; */
+        }
+        .damao {
+            float: left;
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+        .ermao {
+            float: left;
+            width: 200px;
+            height: 300px;
+            background-color: blue;
+        }
+        .box2 {
+            width: 600px;
+            height: 300px;
+            margin: 0 auto;
+            background-color: #000;
+        }
+        /* .clear {
+            clear: both;
+        } */
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box clearfix">
+        <div class="damao"></div>
+        <div class="ermao"></div>
+        <!-- 额外标签法 末尾加一个空标签 加样式 style="clear:both;" -->
+        <!-- <div class="clear"></div> -->
+    </div>
+    <div class="box2"></div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加油立儿--无缝向上滚动</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-decoration: none;
+			color: #666;
+		}
+		body {
+			background-color: pink;
+		}
+		#box {
+			width: 500px;
+			height: 200px;
+			margin: 100px auto;
+			background-color: rgba(255, 255, 255, .3);
+			overflow: hidden;
+		}
+		#box li {
+			margin-bottom: 7px;
+		}
+	</style>
+	<script>
+		window.onload = function () {
+			var box = document.querySelector('#box');
+			var uu1 = document.querySelector('#uu1');
+			var uu2 = document.querySelector('#uu2');
+			var speed = 100;
+			uu2.innerHTML = uu1.innerHTML;
+			// console.log(uu1.scrollHeight); 224
+			function scrollUp() {
+				// 当大盒子的scrollTop( 上面滚动距离, 隐藏距离+边框) 大于等于小盒子的scrollHeight(内容高度+隐藏的内容, 不包含边框和滚动条)
+				if(box.scrollTop >= uu1.scrollHeight) {
+					box.scrollTop = 0;
+				} else {
+					// 无缝向上滚动
+					box.scrollTop ++;
+					// console.log(box.scrollTop);
+				}
+			}
+			var timerId = setInterval(scrollUp, speed);
+			box.onmouseover = function () {
+				clearInterval(timerId);
+			}
+			box.onmouseout = function() {
+				timerId = setInterval(scrollUp, speed);
+			}
+		}
+
+
+	</script>
+</head>
+<body>
+	<div id="box">
+		<ul id="uu1">
+			<li><a href="#">1.知否知否,应是你肥我瘦,嘻嘻!</a></li>
+			<li><a href="#">2.知否知否,应是你肥我瘦,呼呼!</a></li>
+			<li><a href="#">3.知否知否,应是你肥我瘦,zz!</a></li>
+			<li><a href="#">4.知否知否,应是你肥我瘦,嘿嘿!</a></li>
+			<li><a href="#">5.知否知否,应是你肥我瘦,哈哈!</a></li>
+			<li><a href="#">6.知否知否,应是你肥我瘦,啦啦!</a></li>
+			<li><a href="#">7.知否知否,应是你肥我瘦,噗噗!</a></li>
+			<li><a href="#">8.知否知否,应是你肥我瘦,哒哒!</a></li>
+		</ul>
+		<ul id="uu2"></ul>
+	</div>
+</body>
+</html>

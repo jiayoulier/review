@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加油立儿 --脑洞5</title>
+</head>
+<body>
+	<script>
+		var n = 0;
+		function a(){
+			var n = 10;
+			function b(){
+				n++;
+				alert(n); // 11	  12
+			}
+			b();
+			return b;
+		}
+		var c = a();
+		c();  
+		alert(n); // 0
+
+		// 预解析
+
+		// var n;
+		// var c;
+		// n = 0;
+		// function a(){
+		// 	var n ;
+		// 	n = 10;
+		// 	function b(){
+		// 		n++;
+		// 		alert(n);	  
+		// 	}
+		// 	b();
+		// 	// b包含了整个函数
+		// 	return b;
+		// }
+		// c = a(); 11
+		// // c 等于下面这个函数
+		// // function b(){
+		// // 		n++;
+		// // 		alert(n);	  
+		// // 	}
+		// c(); 12
+		// alert(n); 0
+	</script>
+</body>
+</html>

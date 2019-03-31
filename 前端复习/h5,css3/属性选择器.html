@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			text-decoration: none;
+			list-style: none;
+		}
+		.red {
+			color: rgb(255,0,0);
+		}
+		li[class] {
+			color: pink;
+		}
+		li[style] {
+			font-size: 30px;
+		}
+		li[class=underline] {
+			text-decoration: underline;
+		}
+		li[class*=n] {
+			color: purple;
+		}
+		li[class^=red] {
+			font-weight: bold;
+		}
+		li[class$=e] {
+			font-style: italic;
+		}
+		 /*弟弟选择器*/
+		 /*1.相邻且是下一个兄弟元素*/
+		a + li {    
+			font-size: 25px;
+		}
+		/* 2.下面所有的兄弟元素 */
+		.a ~ li {
+			text-decoration: line-through;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li class="red" style="">我叫加油立儿</li>
+		<li class="underline">奥特曼打小怪兽</li>
+		<li class="blue">孙悟空大战铁扇公主</li>
+		<li class="green">牛魔王血战猪八戒</li>
+		<li class="redpink">如来佛祖西天大BOSS</li>
+		<a class="a" href="javascript:void(0)">有本事就点我</a>
+		<li>懒洋洋是小肥羊</li>
+		<li>飞雪连天射白鹿,笑书神侠倚碧鸳</li>
+	</ul>
+</body>
+</html>

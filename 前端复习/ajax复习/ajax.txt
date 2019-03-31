@@ -1,0 +1,45 @@
+1--ajax的作用:
+可以在页面不刷新的情况下，请求服务器，局部更新页面的数据
+2--什么是ajax:
+js向服务器请求数据，实现异步请求，局部刷新。
+
+
+2--异步:
+指某段程序执行时不会阻塞其它程序执行，其表现形式为程序的执行顺序不依赖程序本身的书写顺序，相反则为同步。 
+
+其优势在于不阻塞程序的执行，从而提升整体执行效率。
+
+同步：同一时刻只能做一件事，上一步完成才能开始下一步
+
+异步：同时做多件事，效率更高
+
+XMLHttpRequest可以以异步方式的处理程序。
+
+
+3--创建异步对象的几个步骤
+	-----  在客户端收集数据  ,  通过异步对象给服务器发送异步请求
+	var name = this.name;
+ ---1.通过构造函数创建异步对象 
+ var xhr = new XMLHttpRequest();
+ ---2.设置请求行 open(type,url)   get请求需要在url后拼接参数, post请求需要设置请求头,在发送的时候拼接参数
+ xhr.open('get', 'demo.php?uname=jack&age=20')
+ --3.设置请求头(get方式不需要设置请求头)
+ xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+ --4.设置请求体 send()  get方式没有请求体 使用xhr.send(null)
+   post方式使用  xhr.send('uname=jack&age=18');
+ --5.响应服务器返回的数据 使用xhr.onreadystatechange=function(){}事件监听响应状态
+ 	xhr.readystatechange = function() {
+ 	// 判断响应的过程是否完成(为4代表响应内容解析完成,可以在客户端调用)和状态码是否为200
+ 		if(xhr.readystate == 4 && xhr.status == 200) {
+ 		----- 服务器端返回的数据必须是字符串类型,浏览器从服务器接收的数据类型只能字符串的方式(准确点说二进制) 
+ 			// 接收服务器返回的数据文件
+ 			// 如果文件为普通字符串   使用xhr.responseText
+ 			// 如果文件为XML格式  使用xhr.responseXML
+ 			// 如果文件为json格式字符串 使用js提供的JSON.parse()方法 : 把字符串转换成数组或者对象
+ 			 --- 如果文件以[]描述数据 就转换成数组
+ 			 --- 如果文件以{}描述数据 就转换成对象
+
+
+ 			 索引数组,json_encode返回的就是[ ],关联数组,json_encode返回的就是{ }
+ 		}
+ 	}

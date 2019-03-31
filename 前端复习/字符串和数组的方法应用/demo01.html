@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 三个基本的包装类型 (吧简单数据类型包装成复杂数据类型) String Number Boolean
+		// 原理: 基本数据类型是没有属性和方法的 ,对象才有属性和方法,js会把基本数据类型包装成复杂数据类型
+		// 1.字符串的不可变性 (指的是里面的值不可变,看上去可以改变,实际上是地址变了,新开辟了一个内存空间,所以大量的拼接字符串会有效率问题)
+
+		// 字符串的所有方法.都不会修改字符串本身(因为字符串的不可变性),操作完成会返回一个新的字符串
+
+		// 1.根据字符位置获取字符  即根据字符串的索引获取字符 返回指定索引位置的字符
+		// charAt(index)
+		var str = 'pink';
+		console.log(str.charAt(2)); // n
+		// 遍历字符串
+		for (var i = 0; i < str.length; i++) {
+			console.log(str[i]); // p  i   n   k 
+		}
+
+		//2 .字符串操作方法
+		// concat(str, str1, str2, ...)  连接2个或多个字符串 相当于+拼接
+		// substr(index,length) 从什么位置开始取, 要取的个数
+		var str1 = 'lili最帅了';
+		var str2 = '当然la';
+		console.log(str1.concat(str2, '哈哈哈')); // lili最帅了当然la哈哈哈
+		console.log(str1.substr(2, 3)); // li最
+
+
+		// 3.根据指定字符获取字符位置索引
+		// indexOf('要查找的字符', 开始的index)   返回指定字符在元字符中的位置,返回第一个匹配到的,找的到返回索引,找不到返回-1  lastIndexOf()  从右往左查找
+		var str3 = '奥特曼打 小怪兽';
+		console.log(str3.indexOf('小', 2));  // 5
+		console.log(str3.lastIndexOf('怪', 2)); // -1
+		console.log(str3.lastIndexOf('怪', 6)); //6
+
+		// "abcoefoxyozzopp"查找字符串中所有o出现的位置
+		var str4 = 'abcoefoxyozzopp';
+		var index = -1;
+		do {
+			index = str4.indexOf('o', index + 1);
+			if (index != -1) {
+				console.log(index); // 3 6 9 12
+			}
+		}while(index != -1)
+
+		// 4.replace(被替换的字符串,要替换的字符串)
+		var s = 'abcoefoxyozzopp' // 把所有的o换成!
+		// 用正则表达式
+		var reg = /[o]/g;
+		console.log(s.replace(reg, '!'));
+		// 用while循环
+		while(s.indexOf('o') != -1) {
+			s = s.replace('o', '!');
+		}
+		console.log(s);
+		// 判断字符串中出现最多的那个字符.统计这个次数
+		var s1 = 'abcoefoxyozzopp';
+		var o = {};
+		for (var i = 0; i < s.length; i++) {
+			var item = s1.charAt(i);
+			if(o[item]) {
+				o[item] ++;
+			} else {
+				o[item] = 1;
+			}
+		}
+
+		var max = 0;
+		var char;
+		for (var key in o) {
+			if(max < o[key]) {
+				max = o[key];
+				char = key;
+			}
+		}
+		console.log(max); // 4
+		console.log(char); // o
+
+
+		//5. toUpperCase()  转换大写   toLowerCase() 转换小写
+		var str5 = 'pink';
+		var str6 = 'PINK';
+		console.log(str5.toUpperCase()); // PINK
+		console.log(str6.toLowerCase()); // pink
+
+		// 6.split('切割符')   切割字符串 .切割完之后返回一个新的数组
+		var str9 = '1,2,3';
+		console.log(str9.split(',')); //  ['1', '2', '3']
+		console.log(str9.split('')); //  ['1', ',' , '2' , ',' , '3']
+		console.log(str9.split()); //  ['1,2,3']
+		console.log(str9.split('-')); //  ['1,2,3']
+		
+	</script>
+</body>
+</html>

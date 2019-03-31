@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+       
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <input id="btn" type="button" value="盒子绕z轴旋转">
+    <!-- <a href=""><img src="" alt=""></a> a标签里面嵌套img会有默认高度 -->
+    <script>
+        var box = document.querySelector('.box');
+        document.querySelector('#btn').onclick = function () {
+            box.style.transform = "rotateZ(45deg)";
+            // box.style.transform = "rotateX(45deg)";
+            // box.style.transform = 'rotateY(45deg)';
+        }
+    
+    </script>
+</body>
+</html>

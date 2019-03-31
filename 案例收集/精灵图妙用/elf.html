@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加油立儿--精灵图</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		body {
+			background-color: pink;
+		}
+		#box {
+			position: relative;
+			padding: 0 30px;
+			width: 1000px;
+			height: 200px;
+			background-color: rgba(0, 0, 0, .2);
+			margin: 300px auto;
+			overflow: hidden;
+		}
+		#arrLeft {
+			position: absolute;
+			top: 380px;
+			left: 100px;
+			width: 32px;
+			height: 32px;
+			background: url(img/qixie4.png) no-repeat -34px -280px;
+		}
+		#arrRight {
+			position: absolute;
+			top: 380px;
+			right: 100px;
+			width: 32px;
+			height: 32px;
+			background: url(img/qixie4.png) no-repeat -2px -280px;
+		}
+		#uu {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 2000px;
+			height: 200px;
+			/*background-color: red;*/
+		}
+		#uu li {
+			float: left;
+			margin-top: 45px;
+			margin-right: 5px;
+			width: 110px;
+			height: 110px;
+			background: url(img/qiexie-nav.png) no-repeat;
+			cursor: pointer;
+		}
+		
+		#uu li:first-child {
+			margin-left: 25px;
+			background-position: -5px -10px;
+		}
+		
+		#uu li:nth-child(2) {
+			background-position: -125px -130px;
+		}
+	
+		#uu li:nth-child(3) {
+			background-position: -245px -130px;
+		}
+		
+		#uu li:nth-child(4) {
+			background-position: -365px -130px;
+		}
+		
+		#uu li:nth-child(5) {
+			background-position: -485px -130px;
+		}
+		
+		#uu li:nth-child(6) {
+			background-position: -605px -130px;
+		}
+		
+		#uu li:nth-child(7) {
+			background-position: -725px -130px;
+		}
+		
+		#uu li:nth-child(8) {
+			background-position: -845px -130px;
+		}
+		
+		#uu li:nth-child(9) {
+			background-position: -965px -130px;
+		}
+		
+		#uu li:nth-child(10) {
+			background-position: -1085px -130px;
+		}
+		
+		#uu li:nth-child(11) {
+			background-position: -1205px -130px;
+		}
+		
+		#uu li:nth-child(12) {
+			background-position: -1325px -130px;
+		}
+		
+		#uu li:nth-child(13) {
+			background-position: -1445px -130px;
+		}
+		
+		#uu li:nth-child(14) {
+			background-position: -1565px -130px;
+		}
+		
+		#uu li:nth-child(15) {
+			background-position: -1685px -130px;
+		}
+		
+		#uu li:nth-child(16) {
+			background-position: -1805px -130px;
+		}
+		
+		#uu li:last-child {
+			background-position: -1925px -130px;
+		}
+		
+	</style>
+	<script src="animate.js"></script>
+	<script>
+		window.onload = function () {
+			var box = document.querySelector('#box');
+			var uu = document.querySelector('#uu');
+			var lis = document.querySelectorAll('li');  // 返回的是一个伪数组
+			// console.log(lis.length);
+			var arrLeft = document.querySelector('#arrLeft');
+			var arrRight = document.querySelector('#arrRight');
+			var uuWidth = uu.offsetWidth;
+			for(var i = 0; i < lis.length; i++) {
+				//遍历所有的li,给每个人li添加点击事件
+				var li = lis[i];
+				// 重点 -- 自定义属性与索引,元素之间都有什么剪不断理还乱的联系!
+				li.setAttribute('index', i);
+				li.onclick = liClick;
+				li.onmouseenter = liMOuseenter;
+				li.onmouseleave = liMouseleave;
+			}
+
+			function liClick() {
+				var x = '-5px';
+				var y = '-130px';
+				for(var i = 0; i < lis.length; i++) {
+					//取消所有li的高亮显示
+					var li = lis[i];
+					li.style.backgroundPosition = x + ' ' + y;
+					x = (parseInt(x) - 120) + 'px';
+					// console.log(x)
+				}
+				var index = this.getAttribute('index');
+				// 重点 ---- 点击事件中的索引和移入移出事件中的索引保持一致
+				clickIndex = index; 
+				// 当索引为大于等于4小于等于13,当点击的盒子为第五个到第13个的时候,ul会根据索引移动
+				if (clickIndex >= 4 && clickIndex < 13) {
+
+					animate(uu, -(clickIndex - 4 ) * 120);
+				} 
+				// console.log(index);
+				x = -(clickIndex * 120 + 5) + 'px';
+				y = '-10px';
+				// 再让当前的li高亮显示
+				this.style.backgroundPosition = x + ' ' + y;
+			}
+
+			var clickIndex = 0;
+			function liMOuseenter() {
+				var index = this.getAttribute('index');
+				// console.log(clickIndex);
+				// 判断点击事件中的索引跟当前移入事件的索引,有点击事件,就一致了,就退出函数.
+				if(clickIndex == index) {
+					return;
+				}
+				var y = '-10px';
+				var x = -(index * 120 + 5) + 'px';
+				this.style.backgroundPosition = x + ' ' + y;
+			}
+
+			function liMouseleave() {
+				var index = this.getAttribute('index');
+				//判断点击事件中的索引跟当前移出事件的索引,有点击事件,就一致了,就退出函数.不一致继续往下走;
+				if(clickIndex == index) {
+					return ;  //return 在条件判断中 后面的代码不会执行(挂了)  在函数中结束当前函数
+				}
+				var x = -(index * 120 + 5) + 'px';
+				var y = '-130px';
+				this.style.backgroundPosition = x + ' ' + y;
+			}
+
+			// 点击右箭头移动ul的一半
+			arrRight.onclick = function () {
+				animate(uu, - uuWidth / 2);
+			}
+
+			// 点击左箭头还原ul的位置
+			arrLeft.onclick = function () {
+				animate(uu, 0);
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<div id="arrLeft"></div>
+	<div id="arrRight"></div>
+	<div id="box">
+		<ul id="uu">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>	
+	</div>
+</body>
+</html>

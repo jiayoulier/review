@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+
+	jquery中的ajax
+	<!-- // 1. 引入jquery文件 <script src="jquery.js"></script> -->
+	//2. 向服务器发送ajax请求实现浏览器和服务器的交互,实现异步请求,局部刷新
+	// ajax中支持的参数有两种  1.对象   2.参数格式字符串 (key=value&key=value)
+	$.ajax({
+		var name = $(this).name;
+		 ---- 先从客户端收集用户信息,然后再向服务器发送请求    jquery有个 对象.serialize()方法收集表单数据(可以将表单中所有有name属性值收集生成key=value&key=value的格式)
+		type: 'get',          // 类型get或者post.不写默认为get请求
+		url:  'demo.php',     // 向服务器发送请求的地址
+		data: {
+			uname: name		//  请求的参数,对象键值对的形式
+		},   
+		beforesend : 	function ()	{  // 请求发送前调用
+			if(name.trim() == '') {
+				return false;
+			}
+		}	          
+		datatype: 'text',     // 服务器返回的数据类型,可以自己设置  json xml html script jsonp
+		success : function (data) {  // 响应成功后调用 data的数据类型和设置datatype的类型一样
+			$(this).html(data);      //  业务逻辑写在success中
+		}
+		complete: function () {  // 响应完成时调用,不管成功或失败
+			alert('呵呵');
+		}
+	})
+
+
+
+	jsonp的实现原理是什么 (jsonp可以实现跨域,可以向第三方请求数据)
+		1.主要是利用script标签的天然的跨域特性来发送请求
+		(怎么得到数据呢)
+		2 .实现方式:发送请求的时候传递一个函数名给后台,后台返回数据的时候会调用返回这个函数的调用形式.并且在()中拼接参数
+		3. ajax和jsonp的本质不一样.ajax的核心是通过XMLHttpRequest来发送请求,而jsonp是通过script标签来实现请求的发送
+
+	// 例如
+	<script>
+		function fn(data) {
+			console.log(data); // 可以吧$data里面的数据输出出来
+		}
+
+	</script>
+
+	<script src="http://www.user.com/demo.php?callback=fn"></script>
+	
+	// 下面是demo.php
+	<?php 
+		$callback = $_GET('callback');  // fn
+		
+		$data = file_get_contents('nav.json');
+
+		echo $callback.'('.$data.')';   / / 返回函数调用形式  fn($data)  
+	?>
+
+	//下面是nav.json
+	[
+		{
+			"src" :  "img/2.png",
+			"text" :  "喜洋洋"
+		},
+		{
+			"src" :  "img/3.png",
+			"text" :  "懒洋洋"
+		},
+		{
+			"src" :  "img/4.png",
+			"text" :  "美羊羊"
+		}
+	]
+
+	// 实现跨域请求的两种方式 : 1.CORS跨域
+
+	在响应头设置 header(Access-Control-Allow-Origin:*)
+
+	2.在datatype设置为 :jsonp
+</body>
+</html>
+
+
+
+
+	
+
+
+		

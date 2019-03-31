@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 1.字面量创建对象
+		var obj = {
+			name : '加油立儿',
+			age: 18,
+			say: function() {
+				console.log('我喜欢弹吉他');  // 我喜欢弹吉他
+			}
+		}
+		// 获取对象属性值的两种方式  1.对象.属性名   2.对象['属性名']
+		console.log(obj.name); // 加油立儿
+		console.log(obj['age']); // 18
+		obj.say(); // 方法调用   对象.方法名()
+
+		// 2.new Object 创建对象
+		var ultraman = new Object();
+		ultraman.name = '奥特曼';
+		ultraman.age = 30;
+		ultraman.play = function () {
+			console.log(this.name+ '打小怪兽');  // 奥特曼打小怪兽
+		}
+		// 获取对象的属性  对象.属性名  对象['属性名']
+
+		console.log(ultraman.name); // 奥特曼
+		console.log(ultraman['age']); // 30
+		ultraman.play(); // 方法调用  对象.方法名()
+
+
+		// 3. 构造函数创建对象
+		function Hero(name, attr, attack, distance) {
+			this.name = name;
+			this.attr = attr;
+			this.attack = attack;
+			this.distance = distance;
+		}
+		// 给构造函数的原型中添加方法. 原型作用:共享数据,节省内存空间
+		Hero.prototype.move = function() {
+			console.log(this.name + '点击一次鼠标移动' + this.distance);
+		}
+
+		var hy = new Hero('后羿', '射手', 100, '10em');
+		console.log(hy.name);
+		console.log(hy.attr);
+		console.log(hy.attack);
+		console.log(hy.distance);
+		hy.move();
+		var zgl = new Hero('诸葛亮', '法师', 80, '20em');
+		console.log(zgl.name);
+		console.log(zgl.attr);
+		console.log(zgl.attack);
+		console.log(zgl.distance);
+		zgl.move();
+
+		// 4. 工厂函数创建对象
+		function  dog(name,age,type,color) {
+			//创建一个空对象
+			var o = new Object();
+			o.name = name;
+			o.type = type;
+			o.age = age;
+			o.color = color;
+			o.eat = function () {
+				console.log('我会吃东西');
+			};
+			o.say = function () {
+				console.log('汪汪汪');
+			}
+			return o;
+		}
+	  var dahuang = dog('大黄', 8, '金毛', '黄色');
+	  console.log(dog);
+	  console.dir(dog);
+	  console.log(dahuang);
+	  dahuang.eat();
+	  dahuang.say();
+
+
+	  // 函数的写法
+	 //  1. 命名函数 function 函数名(形参) {
+	 //  	  执行语句
+	 //  	  return 结果
+	 //  }
+	 // 函数调用: 函数名(实参)
+	 function fn() {
+	 	console.log(this);
+	 }
+	 fn();
+   // 2. 匿名函数 function () {}
+   // 3. 自调用函数  (function() {})()
+   // 4. 函数表达式 var fn = function() {}    函数调用 fn()
+	</script>
+</body>
+</html>

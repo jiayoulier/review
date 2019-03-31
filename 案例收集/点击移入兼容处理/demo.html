@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加油立儿--点击移入兼容处理</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		body {
+			background-image: url(img/5.jpg);
+			background-position: center top;
+			background-size: cover;
+		}
+		div {
+			width: 500px;
+			height: 300px;
+			background-color: rgba(0, 0, 0, .3);
+			margin: 200px auto;
+		}
+		ul {
+			width: 520px;
+		}
+		ul li {
+			float: left;
+			width: 30px;
+			height: 30px;
+			margin-top: 125px;
+			margin-right: 50px;
+			background-color: #fff;
+			border: 10px solid #fff;
+			border-radius: 50%;
+		}
+		ul li:first-child {
+			margin-left: 20px;
+		}
+		ul li.current {
+			background-color: pink;
+		}
+	</style>
+	<script>
+		window.onload = function () {
+			var lis = document.querySelectorAll('li');
+			var ul = document.querySelector('ul');
+			var count = lis.length;
+			for (var i = 0; i < lis.length; i++) {
+				var li = lis[i];
+				li.setAttribute('index', i);
+				li.onclick = liClick;
+				li.onmouseover = liMouseover;
+				li.onmouseout = liMouseout;
+			}
+			function liClick() {
+				for (var i = 0; i < lis.length; i++) {
+					var li = lis[i];
+					li.classList.remove('current');
+				}
+				var index = this.getAttribute('index');
+				// 点击事件中的索引与定时器里面的索引要一致
+				liIndex = index;
+				this.classList.add('current');
+			}
+
+			function liMouseover() {
+				this.style.backgroundColor = 'pink';
+			}
+			function liMouseout() {
+				this.style.backgroundColor = '';
+			}
+			var liIndex = 0;
+			// 给个定时器自动点击
+			var timerd = setInterval(function () {
+				liIndex++;
+
+				if (liIndex === count) {
+					liIndex = 0;
+				}
+
+				ul.children[liIndex].click();
+				  
+
+			}, 3000)
+
+
+		}
+
+	</script>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li class="current"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</body>
+</html>

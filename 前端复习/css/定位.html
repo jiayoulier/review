@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		 body {
+            height: 3000px;
+        }
+		.box {
+			position: relative;
+			padding-top: 30px;
+			padding-left: 30px;
+			width: 200px;
+			height: 200px;
+			background-color: pink;
+			margin: 100px auto;
+		}
+		.box1 {
+			position: fixed;
+			/*不给偏移量,开始位置还是相对父元素,但是具有了自身定位的特性*/
+			/*left: 0;
+			top: 0;*/
+			width: 50px;
+			height: 50px;
+			background-color: blue;
+		}
+		.box2 {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 50px;
+			height: 30px;
+			background-color: yellow;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		哈哈哈哈哈哈
+		<div class="box1"></div>
+		<div class="box2"></div>
+	</div>
+</body>
+</html>

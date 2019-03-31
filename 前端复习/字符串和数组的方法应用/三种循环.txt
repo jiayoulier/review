@@ -1,0 +1,76 @@
+1. for 循环
+for(初始化变量;条件表达式;自增表达式) {
+	//循环体
+}
+for(var i = 0; i < 100; i ++) {
+	console.log(i);
+}
+
+- for循环可以重复执行某些相同代码
+- for循环可以重复执行些许不同的代码，因为我们有计数器
+- for循环可以重复执行某些操作 比如 算术运算符 加法操作
+- 随着需求增加，我们有双重for循环可以做更多，更好看效果
+- 双重for循环，外层循环一次，里层for 循环全部。
+
+- for 循环 是 循环条件和数字 直接相关的循环
+
+
+
+2.while 循环
+while(条件表达式) {
+	// 循环体代码
+}
+var num = 1;
+while(num <= 100) {
+	console.log('这个人'+ num + '岁了');
+	num++;
+}
+
+- while 语句就是**当条件满足**时**重复执行相同的代码**；
+- 无论是循环结构还是分支结构，在执行完成后，都会执行后续代码；
+- 在循环体内部，**需要修改循环条件**，否则会造成**死循环**
+
+
+3.do while 循环
+do {
+	
+	// 循环体
+}while(条件表达式)
+var i = 1;
+do {
+	console.log('我吃了' + i + '个包子');
+	i++;
+}while(i <= 10)
+
+- do..while 循环和 while 循环非常像，二者经常可以相互替代，但 do..while 的特点是不管条件成不成立，都会执行一次。
+- do...while 语句就是先执行一遍，后面才根据 **条件是否满足** 决定执行次数；
+- 和 while 循环一样，在循环体内部，**需要修改循环条件**，否则会造成**死循环**。
+
+
+
+
+
+// 4.三中循环的区别
+- 三个循环很多情况下都可以相互替代使用的 
+- 共同点:三个关键条件  计数器 ,  判断条件  ,  计数器自增
+- 如果是用来计数次数，跟数字相关的，三者使用基本相同
+- while 和 do while 可以做更复杂的判断 比 for 灵活一些 
+- while 和 do  while 执行顺序不一样， while先判断后执行   do while 先执行一次，再判断执行
+
+
+
+	// 原生js中遍历数组的方法
+		var array = ['pink', 'red', 'green'];
+		array.forEach(function(value, index) {
+			console.log(value);
+			console.log(index);
+			console.log(this);  // window
+		})
+
+		// jquery中遍历数组的方法
+		var arra = ['gray', 'purple', 'yellow'];
+		$(arra).each(function(index, value) {
+			console.log(value);
+			console.log(index);
+			console.log(this);  ????
+		})

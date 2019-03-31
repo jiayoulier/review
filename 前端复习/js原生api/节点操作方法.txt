@@ -1,0 +1,13 @@
+// insertBfore(插入元素, 参考元素)    把元素插入到页面指定位置(在当前节点的某个子节点之前插入一个子节点)
+	var ul = document.querySelector('ul')
+	var li = document.createElement('li')
+---   ul.insertBefore(li, ul.children[0])
+
+	
+
+
+
+
+// replaceChild(新的节点,旧节点)  吧当前元素的标签进行替换(用指定节点替换掉当前节点的一个子节点,并返回被替换的节点)
+	var div = document.createElement('div');
+	ul.replaceChild(div, ul.children[0])

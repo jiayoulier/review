@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加油立儿--视频播放器</title>
+	<link rel="stylesheet" href="./css/font-awesome.css">
+	<link rel="stylesheet" href="./css/css.css">
+</head>
+<body>
+	<h3 class="playerTitle">视频播放器</h3>
+	<div class="player">
+    	<video src="./mp4/chrome.mp4"></video>
+    	<div class="controls">
+        	<a href="javascript:;" class="switch fa fa-play"></a>
+        	<a href="javascript:;" class="expand fa fa-expand"></a>
+        	<div class="progress">
+            	<div class="bar"></div>
+            	<div class="loaded"></div>
+            	<div class="elapse"></div>
+        	</div>
+        	<div class="time">
+            	<span class="currentTime">00:00:00</span>
+            	\
+            	<span class="totalTime">00:00:00</span>
+        	</div>
+    	</div>
+	</div>
+	<script src="./js/jquery-1.12.2.js"></script>
+	<script>
+		$(function() {
+			// Jq没有提供对视频播放控件的方式，也就意味着如果要操作视频播放，
+			// 必须使用原生的js方法dom元素
+			// 1.获取播放器
+			// 所有的jquery对象都是一个伪数组
+			var video = $('video')[0]; //转为bom对象
+			// console.dir($('video'));
+			// console.log($('video') instanceof Array);
+			// console.dir(video);
+
+			// 2.实现播放与暂停
+			$('.switch').click(function(){
+				if(video.paused){
+					video.play();
+					$(this).addClass('fa-pause');
+					$(this).removeClass('fa-play');
+				}else{
+					video.pause();
+					$(this).addClass('fa-play');
+					$(this).removeClass('fa-pause');
+				}
+			})
+
+			//3.实现全屏操作
+			$('.expand').click(function() {
+				if(video.requestFullScreen) {
+					video.requestFullScreen();
+				}else if(video.webkitRequestFullScreen) {
+					video.webkitRequestFullScreen();
+				}else if(video.mozRequedtFullScreen) {
+					video.mozRequestFullScreen();
+				}
+			})
+
+			// 4.实现播放业务逻辑
+			video.oncanplay = function() {
+				setTimeout(function(){
+					video.style.display = 'block';
+
+					// 获取当前视频文件的总时长
+					var total = video.duration;
+					
+					var result = getResult(total);
+
+					$('.totalTime').html(result);
+				},2000)
+			}
+
+			// 通过总时长计算出时分秒
+			function getResult(time) {
+				var hour = Math.floor(time/60/60);
+				hour = hour < 10 ? "0"+hour:hour;
+				var minute = Math.floor(time/60%60);
+				minute = minute < 10 ? "0" + minute:minute;
+				var second = Math.floor(time%60);
+				second = second < 10 ? "0" + second:second;
+
+				return hour + ":" + minute + ":" + second;
+			}
+
+			//5.实现播放过程中的业务逻辑,当前视频播放时会触发ontimeupdate事件
+			video.ontimeupdate = function() {
+				// 获取当前的播放时间
+				var current = video.currentTime;
+
+				// 计算出时分秒
+				var result = getResult(current);
+
+				$('.currentTime').html(result);
+
+				//设置当前播放进度条的样式
+				var percent = current/video.duration * 100 + "%";
+				$('.elapse').css('width', percent);
+			}
+
+			// 6.实现视频的跳播
+			$('.bar').click(function(e) {
+				 /*1.获取当前鼠标相对于父元素的left值--偏移值
+				 鼠标相对于事件源元素（srcElement）的X坐标，只有IE事件有这个属性
+				 ，标准事件没有对应的属性 */
+            	var offset= e.offsetX;
+            	/*2.计算偏移值相对总父元素总宽度的比例*/
+            	var percent=offset/$(this).width();
+            	/*3.计算这个位置对应的视频进度值*/
+            	var current=percent*video.duration;
+            	/*4.设置当前视频的currentTime*/
+            	video.currentTime=current;
+			})
+
+			// 7.视频播放完毕,重置播放器的状态
+			video.onended = function() {
+				video.currentTime = 0;
+				$('.switch').removeClass('fa-pause').addClass('fa-play');
+			}
+		})
+	</script>
+</body>
+</html>

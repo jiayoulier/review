@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加油立儿-事件委托,事件对象</title>
+</head>
+<body>
+	<a href="http://www.google.com">谷歌</a>
+	<a href="javascript:void(0)">百度</a>
+	<ul>
+		<li>奥特曼</li>
+		<li>小怪兽</li>
+		<li>大肥羊</li>
+		<li>喜洋洋</li>
+	</ul>
+	<script>
+	  // 事件委托:  事件冒泡  
+		var ul = document.querySelector('ul');
+		var link = document.querySelector('a');
+		// 取消a标签的默认行为 
+		// 1. 在标签中 href = "javaScript:void(0)";
+		// 通过事件对象,可以获取到事件发生时和事件相关的一些数据
+		// 事件对象是用来记录一些事件发生时的相关信息的对象。事件对象只有事件发生时才会产生，并且只能是事件处理函数内部访问，在所有事件处理函数运行结束后，事件对象就被销毁！
+		ul.onclick = function (e) {
+			// e 有浏览器兼容性问题
+			e = e || window.event;
+			// console.log(this);
+			//e.target  获取真正发生事件的对象  var target = e.target || e.srcElement
+			//e.eventPhase 事件阶段  1.捕获阶段 2.目标阶段 3.冒泡阶段
+			// e.currentTarget 事件处理函数所在的对象 相当于事件里面的this  
+			e.target.style.backgroundColor = 'pink';
+		}
+		link.onclick = function (e) {
+			e = e || window.event;
+			alert('pink');
+			// 事件中取消a标签的默认行为
+			// 1.return false; 后面的代码不会继续执行,终止函数了
+
+			// DOM标准方法  有兼容性问题 e.returnValue = false
+			 e.preventDefault();  // 后面的代码还会继续执行
+
+			// 终止事件传播  取消事件冒泡  propagation 传播
+			// e.stopPropagation();
+
+			// 非标准的方式 老版本的IE支持      bubble     vi-- 冒泡
+			// e.cancelBubble = true;
+		}
+	</script>
+</body>
+</html>

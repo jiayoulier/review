@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- 静态的script标签通过src属性实现跨域请求 -->
+	<script src="http://www.data.com/jquery.js"></script>
+
+	<!-- 缺点:不支持动态的传递参数 -->
+	<script>
+
+		function fn (data) {
+			console.log(data);
+		}
+		// 动态创建script标签,通过标签的src属性发送请求
+		var script = document.createElement('script');
+		script.src = "http://www.ajax.com/data.php?callback="+fn;
+
+		document.getElementByTagName('body').appendChild(script);
+		// 优点: 可以动态的传递参数 
+		// 缺点: 动态创建script标签发送的是异步请求
+
+
+		// jquery 中jsonp的应用 只能是get请求
+		$.ajax ({
+			type : 'get',
+			url : 'http://www.ajax.com/data.php',
+			datatype: 'jsonp',
+			json: 'callback',   // 传递函数名所需的建名  ,默认为callback
+			jsonCallback : 'fn', //函数名
+			success: function (data) {
+				console.log(data);
+			}
+		})
+
+		<?php
+			$callback = $_GET['callback'];
+			$arr = array("username" => "jack", "password" => "123");
+			echo $callback.'('.json_encode($arr).')';
+		?>
+
+	</script>
+		<?php
+			$callback = $_GET['callback'];
+
+			$data = file_get_contents('demo.json');
+			
+			echo $callback.'('.$data.')';   // fn($data)
+		 ?>
+</body>
+</html>

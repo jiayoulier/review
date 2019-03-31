@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加油立儿---事件的剖析</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		#box1 {
+			width: 500px;
+			height: 300px;
+			background-color: pink;
+			margin: 0 auto;
+		}
+		#box2 {
+			width: 300px;
+			height: 200px;
+			background-color: gray;
+		}
+		#box3 {
+			width: 200px;
+			height: 100px;
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="box1">
+		<div id="box2">
+			<div id="box3">
+				
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		// 事件的类型   对象.事件类型
+
+		// onclick  单击事件
+		// ondblclick  双击事件
+		// onmousedown 鼠标按下事件
+		// onmouseup  鼠标松开事件
+		// onmousemove 鼠标移动事件 (鼠标在元素里面移动会一直发生)
+		// onmmouseover 鼠标移入事件(会发生冒泡) (触及元素会立即触发,且只会发生一次)   onmouseenter 鼠标移入事件(不会发生冒泡)
+		// onmouseout  鼠标离开事件(会发生冒泡)  onmouseleave 鼠标离开事件(不会发生冒泡)
+		// onscroll  鼠标滚动事件
+
+		// // 文本框事件 对象.事件类型
+		// onfoucs  获取焦点事件 onblur 失去焦点事件 
+		// onkeydown 键盘按下事件  onkeyup 键盘抬起事件
+		// onchange  内容改变并且文本框失去焦点时事件发生
+		// oninput 监听当前指定内容改变的时候发生(添加内容,删除内容),就会触发事件
+		// oninvalid  验证不通过时触发  setCustomValidity('自定义内容') 
+		// window.ononline  = function () {} // 网络接通的时候触发
+		// window.onoffline  = function () {} // 网络断开的时候触发
+
+		// 事件的三个阶段
+		// 1.捕获阶段 (由外到内)
+		// 2.当前目标阶段
+		// 3.冒泡阶段 (由内到外)
+		// onclick  注册事件的第一种方式
+    	// 无法给同一个对象的同一个事件注册多个事件处理函数
+
+		// addEventListener(事件类型,回调函数,是否冒泡 )('cilck', function() {}, false) 
+		// 可以给同一个对象的同一个事件注册多个事件处理函数 , 但是有兼容性问题 ie9以下不支持.ie9以下使用attachEvent
+		// attachEvent('onclick', function() {}) 只有事件冒泡
+		// onclick 只有事件冒泡
+		// 当addEventListener 第三个参数默认是false 第三个参数为false的时候 ,为事件冒泡, 第三个参数为true的时候,为事件捕获
+
+		var box1 = document.querySelector('#box1');
+		var box2 = document.querySelector('#box2');
+		var box3 = document.querySelector('#box3');
+		var arr = [box1, box2, box3];
+		for (var i = 0; i < arr.length; i++) {
+			arr[i].addEventListener('click', function() {
+				console.log(this.id);
+			}, false);
+		}
+		// box2.addEventListener('click', function () {
+		// 	console.log(this.id);
+		// }, false);
+		// box1.addEventListener('click', function () {
+		// 	console.log(this.id);
+		// }, true);
+		// box3.addEventListener('click', function () {
+		// 	console.log(this.id);
+		// }, false);
+		// 事件冒泡 : 给一个盒子添加事件,点击这个盒子的子盒子, 也会触发这个盒子的点击事件.同时给父盒子以及子盒子添加相同事件,点击某个盒子,会先触发该盒子的子盒子的点击事件,再依次由内往外执行点击事件
+		// 
+		// 事件捕获:给一个盒子添加事件, 点击这个盒子的子盒子, 也会触发这个盒子的点击事件.同时给父盒子以及子盒子添加相同事件,
+		// 点击某个盒子,会先触发这个盒子的父盒子的点击事件.依次由外到内的执行点击事件
+		// for (var i = 0; i < arr.length; i++) {
+		// 	arr[i].addEventListener('click', function() {
+		// 		console.log(this.id);
+		// 	}, true);
+		// }
+
+
+
+	</script>
+</body>
+</html>

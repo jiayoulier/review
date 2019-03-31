@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var c = 4;
+		var d = [1,2,3];
+		function b() {
+			alert(123);//123 123
+		}
+		console.log(b);
+		c = b();
+		alert(c); // undefined
+		var c = b;
+		c(); 
+		alert(d); // 1,2,3
+		// alert(undefined);
+	</script>
+</body>
+</html>

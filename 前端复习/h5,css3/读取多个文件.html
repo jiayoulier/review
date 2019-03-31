@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	 <form action="">
+        <input type="file" name="file" id="file" multiple/><br />
+        <div></div>
+        <input type="submit">
+    </form>
+    <script>
+    	document.querySelector('#file').onchange = function() {
+    		var files = this.files; // 返回一个文件列表(伪数组) 
+    		// console.log(files);  FileList
+    		// console.log(files instanceof Array);  false
+    		for(var i = 0; i < files.length; i++) {
+    			readerData(files[i]); 
+    		}
+    		// 第二种方法
+    		// for(var i = 0; i < files.length; i++) {
+    		// 	(function(obj){
+    		// 		var reader = new FileReader();
+    		// 		reader.readAsDataURL(obj);
+    		// 		reader.onload = function() {
+    		// 			var img = document.createElement('img');
+    		// 			img.src = reader.result;
+    		// 			document.body.appendChild(img);
+    		// 		}
+    		// 	})(files[i])
+    		// }
+    	}
+    	function readerData(obj){
+    		// 1.创建文件读取对象
+    		var reader = new FileReader();
+    		//	2.读取文件
+    		reader.readAsDataURL(obj);
+    		// 3. 读取完成成功时
+    		reader.onload = function() {
+    			var img = document.createElement('img');
+    			img.src = reader.result;
+    			document.body.appendChild(img);
+    		}
+    	}
+
+    </script>
+</body>
+</html>

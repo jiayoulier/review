@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// javaScript创建正则对象的两种方法
+		// 1.var reg = new RegExp('\d', 'i')   匹配数字并且忽略大小写
+		// var reg = new RegExp('\d', 'g')   匹配数字并且全局匹配
+		// var reg = new RegExp('\d', 'gi')   匹配数字并且忽略大小写还有全局匹配
+
+		// 2.var reg = \\d\i;   匹配数字并且忽略大小写
+		// var reg = \\d\g;   匹配数字并且全局匹配
+		// var reg = \\d\gi;   匹配数字并且全局匹配,忽略大小写
+
+
+
+
+		// 跟正则表达式相关的方法   regular (合格的)  expression(表达式)
+
+		// 1.RegExp对象   test 检验     exec 执行
+		// test()  匹配  正则对象.test(字符串)  返回值是一个布尔值
+		// exec() 匹配并提取   只返回一个匹配到的结果 ,并且返回值是一个数组
+
+		// 提取工资的案例
+		var str = '加油立儿:10000, 小怪兽: 3000, 奥特曼:6000';
+
+		var reg = /\d+/g;
+
+		var content = reg.exec(str);
+		console.log(content) 
+		var content = reg.exec(str);
+		console.log(content) 
+
+		do {
+			var content = reg.exec(str);
+			if (content) {
+				console.log(content[0]);
+			}
+		}while(content)
+
+		// String 对象   match 匹配,相配,比赛
+		// match(提取内容)   提取多个内容  返回值是一个数组
+		// replace(被替换的内容, 要代替的内容)  
+		// split('切割符') 切割
+		//search() 搜索
+		var content2 = str.match(reg);
+		console.log(content2);
+
+		// 提取日期 分组提取
+		var str2 = '1997-02-19';
+		var reg1 = /(\d{4})-(\d{2})-(\d{2})/gi;
+
+		var content3 = reg1.exec(str2);
+		console.log(content3);//  [1997-02-19 , 1997, 02, 19]
+		console.log(content3[0]);  // 1997-02-19
+		console.log(content3[1]); // 1997
+		console.log(content3[2]);  // 02
+		console.log(content3[3]);  // 19
+		console.log(RegExp.$1); // 1997
+		console.log(RegExp.$2); // 02
+		console.log(RegExp.$3); // 19
+
+		var str3 = '1997/2-19';
+		var reg2 = /[/-]/gi;
+		var content4 = str3.split(reg2);
+		console.log(content4); // [1997, 2, 19]
+
+		// 提取邮件中的每一部分
+		var str4 = 'xxx@jiayoulier.com';
+		var reg3 = /(\w+)@(\w+)\.(\w+)/;
+		var reg4 = /[@.]/;
+		console.log(reg3.exec(str4));
+		console.log(reg3.exec(str4)[1]); // xxx 
+		console.log(reg3.exec(str4)[2]); // jiayoulier
+		console.log(reg3.exec(str4)[3]);  // com
+		var content5 = str4.split(reg4);
+		console.log(content5);  // [xxx, jiayoulier, com]
+
+		// 替换所有空白  trim() --- (修剪,整理)     去除前后空白
+		var str5 = ' 啦啦 西西 写 jjj ll';
+		var reg5 = /\s/g;
+		var content6 = str5.replace(reg5, '');
+		console.log(content6); // 啦啦西西写jjjll
+		console.log(str5.split(' ').join(''));
+		console.log(str5.split('')); // 吧每一个字符都变成一个值.有多少个字符(包括空格),数组中就有多少项
+		console.log(str5.split());  // 直接变成一个长度为1 的数组 [' 啦啦 西西 写 jjj ll']
+
+
+		var str6 = 'jj,lal,abx，com';  // 把所有逗号变成.
+		var a = str6.split(',');  
+		console.log(a);// [jj,lal,abx.com]
+		console.log(a.join()); // 直接变成一个字符串jj,lal,abx.com
+		console.log(a.join(',|.')); // 去掉所有的逗号  jjlalabx.com
+		var reg6 = /,|，/g;
+		console.log(str6.replace(reg6, '.'));
+		console.log(str6.search(','));// 2
+	</script>
+</body>
+</html>

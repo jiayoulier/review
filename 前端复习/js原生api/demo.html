@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box"></div>
+	<script>
+		// 如何知道.浏览器是否支持元素的某个属性
+		var div = document.getElementById('box');
+		console.dir(div);
+
+		//当属性不存在的时候返回 undefined
+		console.log(typeof div.a);  // undefined
+		//当属性存在的时候返回的是 该元素的类型
+		console.log(typeof div.id);  // string
+
+
+		console.log(typeof div.innerText); //string (默认空字符串"")
+		// 可以用这个来处理innerText的兼容性问题
+
+
+
+		// 标签的属性值一般在DOM对象上一般是string类型
+	</script>
+</body>
+</html>

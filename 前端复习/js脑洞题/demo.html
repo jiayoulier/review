@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加油立儿--脑洞1</title>
+</head>
+<body>
+	<script>
+		console.log(a); // undefined
+		var a = 8;
+		function fn(){
+			console.log(a); // undefined
+			var a = 15;
+		}
+		fn();
+		console.log(a); // 8
+
+		// 预解析
+		// var a;
+		// console.log(a); 
+		// a = 8;
+		// function fn(){
+		// 	var a
+		// 	console.log(a); 
+		// 	a = 15;
+		// }
+		// fn();
+		// console.log(a); 
+	</script>
+</body>
+</html>

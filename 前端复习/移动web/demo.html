@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.container {
+			min-width: 320px;
+			max-width: 640px;
+			width: 100%;
+			margin: 0 auto;
+			background-color: skyblue;
+			height: 1000px;
+		}
+		div {
+			width: 200px;
+			height: 200px;
+			background-color: pink;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box"></div>
+	</div>
+	<script>
+		window.onload = function() {
+			var div = document.querySelector('div');
+			// div.onclick = function() {
+			// 	console.log('我是移动web点击事件'); 点击松开了触发
+			// }
+			div.ontouchstart = function(e) {
+				console.log('我是移动web触摸开始事件');
+				// console.dir(e);
+				console.log(e.touches[0].clientX,e.touches[0].clientY);
+				console.log(e.touches[0].pageX,e.touches[0].pageY);
+				console.log(e.touches[0].screenX,e.touches[0].screenY);
+				// TouchList---触摸点(一个手指就是一个触发点,和屏幕的接触点的个数)的集合
+				// changedTouches 改变后的触摸点的集合
+				// targetTouches 当前元素的触发点的集合
+				// touches 页面上所有触发点的集合
+				// 触摸点在每个事件触发的时候会不会去记录触摸点?
+				// changedTouches 每个事件都会记录
+				// targetTouches和touches 在离开屏幕的时候无法记录触摸点
+			}
+			div.ontouchend = function(e) {
+				console.log('我是移动web手指离开屏幕时触发');
+				// console.dir(e);
+			}
+			div.ontouchmove = function(e) {
+				console.log('我是当手指在屏幕上来回滑动的时候触发');
+				// console.dir(e);
+			}
+		}
+		// 分析滑动的原理
+		/*
+		1.让触摸的元素随着手指的滑动做位置的改变
+		2.位置的改变,需要当前手指的坐标
+		3.在每一个触摸点中会记录当前触摸点的坐标.e.touches[0] 第一个触摸点
+		4.clientX clientY  基于浏览器窗口(视口)
+		5.pageX pageY	基于页面(视口)
+		6.screenX screenY 基于屏幕
+		*/
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+背景:
+
+在ajax()请求success方法的回调函数中,我们的业务逻辑使用生成的字符串追加到当前页面中,拼接字符串的过程太麻烦,而且也不利于后期的维护,所以就有了模板引擎的出现
+
+
+步骤:
+
+
+1. 引入模板文件
+<script  type="text/javascript" src="jquery.js"></script>
+<script	type="text/javascript" src="template-web.js" ></script>
+2.根据业务需求编写模板  type= text/template
+<script type="text/template" id="temp">
+   
+
+
+
+
+</script>
+3.发送ajax请求,在success回调函数中用var html = template(模板id, 对象(是数组的话包装成对象)) 返回值是模板片段
+
+$.ajax({
+	var data = $('form').serialize();
+	type: 'get',
+	url: 'demo.php',
+	data: data,
+	datatype: 'json',
+	success: function(res) {
+		// 调用模板引擎动态生成页面结构
+		// 如果参数是对象,直接传入参数,
+		// 如果参数是数组,就包装为对象
+		var obj = {'items': res};
+		var html = template('temp', obj);
+		$('tbody').html(html);
+	}
+
+
+
+})
+
